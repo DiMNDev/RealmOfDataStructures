@@ -7,7 +7,8 @@ public class Challenge
     public int RoomIndex { get; set; }
     public string Description { get; set; }
     public List<string> Options { get; set; }
-
+    public bool Resolved { get; set; } = false;
+    public bool Skip { get; set; } = false;
     public Dictionary<int, Action<Hero>> Funcs { get; set; } = new();
 
     public Challenge(int roomIndex, string description, List<string> options)

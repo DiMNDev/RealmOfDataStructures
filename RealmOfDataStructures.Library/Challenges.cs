@@ -27,7 +27,7 @@ public class LivingRealmChallenges : ChallengeTree
         c3_2.Funcs.Add(1, (hero) => { Console.WriteLine("It's dead. It's not going anywhere"); });
         #endregion
         Challenge c3 = new(3, "You startled the bats, what do you do?", ["Attack!", "Run!",]);
-        c3.Funcs.Add(0, (hero) => { if (hero.Equipped.FirstOrDefault(e => e.Type == RealmOfDataStructures.Equipment.Equipment_Type.Weapon) != null) { Console.WriteLine("DIE BATS, DIE!!"); Thread.Sleep(1200); Console.WriteLine("You unalived those bats!"); hero.Agility += 25; Console.WriteLine("You gained 25 Agility"); Insert(c3_2); } else { Console.WriteLine("You swat with your hands and sustain injury"); hero.Health -= 15; Console.WriteLine("You lost 15 health"); }; });
+        c3.Funcs.Add(0, (hero) => { if (hero.Equipped.FirstOrDefault(e => e != null && e.Type == RealmOfDataStructures.Equipment.Equipment_Type.Weapon) != null) { Console.WriteLine("DIE BATS, DIE!!"); Thread.Sleep(1200); Console.WriteLine("You unalived those bats!"); hero.Agility += 25; Console.WriteLine("You gained 25 Agility"); Insert(c3_2); } else { Console.WriteLine("You swat with your hands and sustain injury"); hero.Health -= 15; Console.WriteLine("You lost 15 health"); }; });
         c3.Funcs.Add(1, (hero) => { Console.WriteLine("You aquired a Potion of Healing!"); hero.PickUpItem(new PotionOfHealing("Potion of Healing", hero, 20)); });
         Insert(c3);
         #endregion

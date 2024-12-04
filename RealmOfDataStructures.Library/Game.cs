@@ -58,10 +58,11 @@ public partial class Game
         Challenge challenge = Challenges.Search(CurrentRoom.ID);
         Util.DisplayRoom(CurrentRoom.RoomName);
         Console.WriteLine(CurrentRoom.EnterMessage);
-        if (challenge != null)
+        if (challenge != null && !challenge.Skip)
         {
             DisplayChallenge(challenge);
             Util.ClearMenu(top);
+            challenge.Skip = true;
             DisplayOptions();
         }
         else
@@ -72,6 +73,10 @@ public partial class Game
 
     private void DisplayChallenge(Challenge challenge)
     {
+        if (challenge.Resolved)
+        {
+            return;
+        }
         Console.WriteLine($"{challenge.Description}");
         int Counter = 1;
         foreach (var option in challenge.Options)
@@ -83,12 +88,15 @@ public partial class Game
             int input = int.Parse(Console.ReadLine()) - 1;
             Action<Hero> func = challenge.Funcs.FirstOrDefault(f => f.Key == input).Value;
             func(hero);
-            Challenges.Delete(CurrentRoom.ID);
+            if (challenge.Resolved)
+            {
+                Challenges.Delete(CurrentRoom.ID);
+            }
             Util.WaitForAnyKey();
         }
-        catch (System.Exception)
+        catch (Exception)
         {
-            throw;
+            DisplayOptions();
         }
     }
     private void DisplayStandardOptions(int top)
@@ -150,6 +158,8 @@ public partial class Game
         int input = int.Parse(Console.ReadLine());
         if (input > 0 && input <= CurrentRoom.AdjacentRooms.Count)
         {
+            Challenge challenge = Challenges.Search(CurrentRoom.ID);
+            challenge.Skip = false;
             CurrentRoom = CurrentRoom.AdjacentRooms[input - 1];
             Util.ClearMenu(--top);
             DisplayOptions();
