@@ -5,6 +5,7 @@ using RealmOfDataStructures.ChalengeTree;
 using RealmOfDataStructures.ConsoleManger;
 using RealmOfDataStructures.Dungeon;
 using RealmOfDataStructures.Hero;
+using RealmOfDataStructures.Item;
 using Room;
 
 
@@ -49,6 +50,8 @@ public partial class Game
     public void StartAdventure()
     {
         CurrentRealm = RealmOfLiving;
+        hero.PickUpItem(new GlassOfMilk("Jar of Milk", hero));
+        hero.PickUpItem(new BasicAttrRing("Basic Ring", hero));
         CurrentRoom = CurrentRealm.DungeonMap.FirstOrDefault(r => r.Key == 1).Value;
         DisplayOptions();
     }

@@ -85,3 +85,47 @@ public class Key : Item
         Unlocks = unlocks;
     }
 }
+
+public class GlassOfMilk : Item
+{
+    public GlassOfMilk(string itemName, Hero owner) : base(itemName, owner)
+    {
+    }
+    public override void Use(string? msg)
+    {
+
+        base.Use(msg);
+    }
+    public void Use(UseFrom option)
+    {
+        string message = option switch
+        {
+            UseFrom.challenge => "",
+            UseFrom.pouch => ""
+        };
+
+        Use(message);
+    }
+}
+public class BasicAttrRing : Item
+{
+    public BasicAttrRing(string itemName, Hero owner) : base(itemName, owner)
+    {
+    }
+    public override void Use(string? msg)
+    {
+        Owner.Agility += 10;
+        Owner.Strength += 10;
+        Owner.Inteligence += 10;
+        // create an extended Equipment version
+        base.Use($"You equipped a basic ring: Strength: +10, Intelligence: +10, Agility: +10");
+    }
+}
+
+
+public enum UseFrom
+{
+    pouch,
+    challenge
+
+}
