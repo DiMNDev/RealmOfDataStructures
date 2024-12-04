@@ -106,9 +106,8 @@ public partial class Game
     {
         Console.WriteLine("What you you like to do?");
         Console.WriteLine("1. Move");
-        Console.WriteLine("2. Use");
-        Console.WriteLine("3. Attack");
-        Console.WriteLine("4. Run");
+        Console.WriteLine("2. Pouch");
+        Console.WriteLine("3. Run");
         try
         {
             int input = int.Parse(Console.ReadLine()) - 1;
@@ -117,8 +116,7 @@ public partial class Game
             {
                 0 => Options.move,
                 1 => Options.use,
-                2 => Options.attack,
-                3 => Options.run,
+                2 => Options.run,
                 _ => throw new InvalidSelctionException()
             };
             switch (option)
@@ -132,11 +130,8 @@ public partial class Game
                     Util.ClearMenu(top);
                     DisplayOptions();
                     break;
-                case Options.attack:
-                    Console.WriteLine("Attack");
-                    break;
                 case Options.run:
-                    Console.WriteLine("run");
+                    Console.WriteLine("Run");
                     break;
                 default:
                     throw new InvalidSelctionException();

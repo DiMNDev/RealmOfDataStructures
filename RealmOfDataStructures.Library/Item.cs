@@ -1,4 +1,6 @@
 namespace RealmOfDataStructures.Item;
+
+using RealmOfDataStructures.ConsoleManger;
 using RealmOfDataStructures.Hero;
 
 
@@ -117,6 +119,7 @@ public class BasicAttrRing : Item
         Owner.Agility += 10;
         Owner.Strength += 10;
         Owner.Inteligence += 10;
+        Util.ReloadStats(Owner);
         // create an extended Equipment version
         base.Use($"You equipped a basic ring: Strength: +10, Intelligence: +10, Agility: +10");
     }
